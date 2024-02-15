@@ -4,6 +4,8 @@ import os.path
 import re
 from argparse import ArgumentParser
 
+fvupgrader_version: str = "1.0.0"
+
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
 version_file: str = "pubspec.yaml"
 
@@ -136,6 +138,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--patch", help="Upgrade the patch version", action="store_true", default=False
+    )
+    parser.add_argument(
+        "--version", action="version", version=f"%(prog)s v{fvupgrader_version}"
     )
 
     args = parser.parse_args()
