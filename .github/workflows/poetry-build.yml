@@ -1,0 +1,21 @@
+name: Poetry build
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  releaase:
+    runs-on: "ubuntu-latest"
+    permissions:
+        contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+      - uses: abatilo/actions-poetry@v2
+      - name: Build package with poetry
+        run: poetry build
+      - name: Release package to GitHub releases
+        uses: ncipollo/release-action@v1
+        with:
+            artifacts: "dist/*"
