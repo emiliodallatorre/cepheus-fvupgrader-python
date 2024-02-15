@@ -2,6 +2,7 @@
 
 [![Pylint](https://github.com/emiliodallatorre/fvupgrader/actions/workflows/pylint.yml/badge.svg)](https://github.com/emiliodallatorre/fvupgrader/actions/workflows/pylint.yml)
 [![Upload Python Package](https://github.com/emiliodallatorre/fvupgrader/actions/workflows/python-publish.yml/badge.svg)](https://github.com/emiliodallatorre/fvupgrader/actions/workflows/python-publish.yml)
+[![PyPI version](https://badge.fury.io/py/fvupgrader.svg)](https://badge.fury.io/py/fvupgrader)
 
 This is a Python script that automates the process of upgrading the version of a Flutter project. It updates the version in the `pubspec.yaml` file, commits the changes, tags the release, and pushes the changes to the remote repository.
 
