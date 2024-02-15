@@ -33,7 +33,7 @@ def update_version(new_version: str, directory_path: str) -> None:
     with open(f"{directory_path}/{version_file}", "r") as file:
         content = file.read()
         new_content = re.sub(version_regex, f"version: {new_version}", content)
-    with open(version_file, "w") as file:
+    with open(f"{directory_path}/{version_file}", "w") as file:
         file.write(new_content)
 
 
@@ -70,12 +70,22 @@ def main(args) -> None:
 
     print("Current version:", get_version(directory_path))
     available_versions = get_available_next_versions(directory_path)
-    print("Available next versions:")
-    for index, version in enumerate(available_versions):
-        print(f"{index + 1}. {version}")
 
-    new_version_number = input("Choose a new version: ")
-    new_version = available_versions[int(new_version_number) - 1]
+    if not args.major and not args.minor and not args.patch:
+        print("Available next versions:")
+        for index, version in enumerate(available_versions):
+            print(f"{index + 1}. {version}")
+
+        new_version_number = input("Choose a new version: ")
+        new_version = available_versions[int(new_version_number) - 1]
+    else:
+        if args.major:
+            new_version = available_versions[2]
+        elif args.minor:
+            new_version = available_versions[1]
+        elif args.patch:
+            new_version = available_versions[0]
+
     print(f"Updating to {new_version}...")
 
     update_version(new_version, directory_path)
@@ -90,6 +100,16 @@ def fix_args(args) -> ArgumentParser:
         raise Exception("You cannot push without committing")
     if not args.no_tag and args.no_commit:
         raise Exception("You cannot tag without committing")
+
+    if args.major and args.minor:
+        raise Exception(
+            "You cannot upgrade the major and minor versions at the same time")
+    if args.major and args.patch:
+        raise Exception(
+            "You cannot upgrade the major and patch versions at the same time")
+    if args.minor and args.patch:
+        raise Exception(
+            "You cannot upgrade the minor and patch versions at the same time")
 
     return args
 
@@ -107,6 +127,15 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--no-tag", help="Tag the release in the git repository", action="store_true", default=False
+    )
+    parser.add_argument(
+        "--major", help="Upgrade the major version", action="store_true", default=False
+    )
+    parser.add_argument(
+        "--minor", help="Upgrade the minor version", action="store_true", default=False
+    )
+    parser.add_argument(
+        "--patch", help="Upgrade the patch version", action="store_true", default=False
     )
 
     args = parser.parse_args()
