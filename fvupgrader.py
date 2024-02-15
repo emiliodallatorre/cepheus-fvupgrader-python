@@ -45,7 +45,7 @@ def get_version(directory_path: str) -> str:
         raise FileNotFoundError("Version not found in pubspec.yaml")
 
 
-def get_available_next_versions(directory_path: str) -> list[str]:
+def get_available_next_versions(directory_path: str) -> list:
     """
     Returns a list of available next versions based on the current version of the directory.
 
