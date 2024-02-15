@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-import os
+import os.path
 import re
+from argparse import ArgumentParser
 
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
 version_file: str = "pubspec.yaml"
@@ -46,11 +47,18 @@ def tag_release(new_version: str) -> None:
     os.system("git push origin main")
 
 
-def is_current_dir_git_repo() -> bool:
-    return os.path.isdir(".git")
+def is_dir_git_repo(directory_path: str) -> bool:
+    return os.path.isdir(directory_path + "/.git")
 
 
-def main() -> None:
+def is_dir_flutter_project(directory_path: str) -> bool:
+    return os.path.isfile(directory_path + "/pubspec.yaml")
+
+
+def main(directory_path: str) -> None:
+    if not is_dir_flutter_project(directory_path):
+        raise Exception("This is not a Flutter project")
+
     print("Current version:", get_version())
     available_versions = get_available_next_versions()
     print("Available next versions:")
@@ -62,9 +70,16 @@ def main() -> None:
     print(f"Updating to {new_version}...")
 
     update_version(new_version)
-    if is_current_dir_git_repo():
+    if is_dir_git_repo(directory_path):
         tag_release(new_version)
 
 
 if __name__ == "__main__":
-    main()
+    parser: ArgumentParser = ArgumentParser()
+    parser.parse_args()
+    parser.add_argument(
+        "--path", help="Path to the directory containing the pubspec.yaml file", type=str, default=".", required=False)
+
+    args = parser.parse_args()
+
+    main(args.path)
