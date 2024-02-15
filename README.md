@@ -1,5 +1,7 @@
 # Flutter Version Upgrader (fvupgrader)
 
+[![Pylint](https://github.com/emiliodallatorre/fvupgrader/actions/workflows/pylint.yml/badge.svg)](https://github.com/emiliodallatorre/fvupgrader/actions/workflows/pylint.yml)
+
 This is a Python script that automates the process of upgrading the version of a Flutter project. It updates the version in the `pubspec.yaml` file, commits the changes, tags the release, and pushes the changes to the remote repository.
 
 ## Features
