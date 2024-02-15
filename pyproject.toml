@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fvupgrader"
-version = "1.0.1"
+version = "1.0.2"
 description = "fvupgrader streamlines version upgrades in Flutter projects by automatically updating the pubspec.yaml file and tagging changes in Git. Simplify version control for your Flutter apps, packages, and plugins with this versatile tool."
 authors = ["Emilio Dalla Torre <info@emiliodallatorre.it>"]
 license = "MIT"
