@@ -41,8 +41,8 @@ def get_version(directory_path: str) -> str:
         match = re.search(version_regex, content)
         if match:
             return match.group(1)
-        else:
-            raise FileNotFoundError("Version not found in pubspec.yaml")
+
+        raise FileNotFoundError("Version not found in pubspec.yaml")
 
 
 def get_available_next_versions(directory_path: str) -> list[str]:
