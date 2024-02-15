@@ -22,6 +22,22 @@ python fvupgrader.py --path /path/to/flutter/project
 
 Replace `/path/to/flutter/project` with the actual path to your Flutter project. If you don't provide the `--path` argument, the script will use the current directory (`.`) as the default.
 
+## Installation
+
+You can download the `fvupgrader.py` script directly from the repository:
+
+```bash
+curl -O https://raw.githubusercontent.com/emiliodallatorre/cepheus-fvupgrader-python/main/fvupgrader.py
+```
+
+To install it, move the downloaded script to /usr/local/bin:
+
+```bash
+sudo mv fvupgrader.py /usr/local/bin/fvupgrader
+```
+
+After moving the script, you can run it from anywhere on your system by typing `fvupgrader` in your terminal.
+
 ## Requirements
 
 - Python 3
