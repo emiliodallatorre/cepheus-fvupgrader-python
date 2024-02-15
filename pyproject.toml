@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "fvupgrader"
+version = "0.1.0"
+description = "fvupgrader streamlines version upgrades in Flutter projects by automatically updating the pubspec.yaml file and tagging changes in Git. Simplify version control for your Flutter apps, packages, and plugins with this versatile tool."
+authors = ["Emilio Dalla Torre <info@emiliodallatorre.it>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+fvupgrader = 'fvupgrader:entry_point'

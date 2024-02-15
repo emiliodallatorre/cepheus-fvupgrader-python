@@ -213,7 +213,12 @@ def fix_args(parsed_args) -> ArgumentParser:
     return parsed_args
 
 
-if __name__ == "__main__":
+def entry_point() -> None:
+    """
+    Entry point function for the fvupgrader script.
+
+    Parses command line arguments, fixes the arguments, and calls the main function.
+    """
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
         "--path", help="path to the directory containing the pubspec.yaml file",
@@ -252,3 +257,7 @@ if __name__ == "__main__":
     args = fix_args(args)
 
     main(args)
+
+
+if __name__ == "__main__":
+    entry_point()
