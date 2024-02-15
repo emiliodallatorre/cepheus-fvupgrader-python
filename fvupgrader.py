@@ -37,15 +37,21 @@ def update_version(new_version: str, directory_path: str) -> None:
         file.write(new_content)
 
 
-def tag_release(new_version: str, directory_path: str) -> None:
+def git_operations(new_version: str, directory_path: str, args) -> None:
     # Commit the changes
-    os.system(f"git -C {directory_path} add {version_file}")
-    os.system(
-        f"git -C {directory_path} commit -am 'Bump version to {new_version}'")
+    if not args.no_commit:
+        os.system(f"git -C {directory_path} add {version_file}")
+        os.system(
+            f"git -C {directory_path} commit -am 'Bump version to {new_version}'")
 
-    print(f"Tagged release {new_version}")
+    # Tag the release
+    if not args.no_tag:
+        os.system(f"git -C {directory_path} tag {new_version}")
+        print(f"Tagged release {new_version}")
 
-    os.system(f"git -C {directory_path} push")
+    # Push the changes
+    if not args.no_push:
+        os.system(f"git -C {directory_path} push")
 
 
 def is_dir_git_repo(directory_path: str) -> bool:
@@ -56,7 +62,9 @@ def is_dir_flutter_project(directory_path: str) -> bool:
     return os.path.isfile(directory_path + "/pubspec.yaml")
 
 
-def main(directory_path: str) -> None:
+def main(args) -> None:
+    directory_path = os.path.abspath(args.path)
+
     if not is_dir_flutter_project(directory_path):
         raise Exception("This is not a Flutter project")
 
@@ -74,14 +82,34 @@ def main(directory_path: str) -> None:
 
     new_git_version: str = f"v{new_version}"
     if is_dir_git_repo(directory_path):
-        tag_release(new_git_version, directory_path)
+        git_operations(new_git_version, directory_path, args)
+
+
+def fix_args(args) -> ArgumentParser:
+    if not args.no_push and args.no_commit:
+        raise Exception("You cannot push without committing")
+    if not args.no_tag and args.no_commit:
+        raise Exception("You cannot tag without committing")
+
+    return args
 
 
 if __name__ == "__main__":
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
-        "--path", help="Path to the directory containing the pubspec.yaml file", type=str, default=".", required=False)
+        "--path", help="Path to the directory containing the pubspec.yaml file", type=str, default=".", required=False
+    )
+    parser.add_argument(
+        "--no-push", help="Push the changes to the git repository", action="store_true", default=False
+    )
+    parser.add_argument(
+        "--no-commit", help="Commit the changes to the git repository", action="store_true", default=False
+    )
+    parser.add_argument(
+        "--no-tag", help="Tag the release in the git repository", action="store_true", default=False
+    )
 
     args = parser.parse_args()
+    args = fix_args(args)
 
-    main(args.path)
+    main(args)
