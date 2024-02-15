@@ -6,7 +6,7 @@ import os.path
 import re
 from argparse import ArgumentParser
 
-fvupgrader_version: str = "1.0.0"
+fvupgrader_version: str = "1.0.1"
 
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
 version_file: str = "pubspec.yaml"
