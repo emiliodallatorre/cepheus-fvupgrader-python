@@ -119,25 +119,25 @@ def fix_args(args) -> ArgumentParser:
 if __name__ == "__main__":
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
-        "--path", help="Path to the directory containing the pubspec.yaml file", type=str, default=".", required=False
+        "--path", help="path to the directory containing the pubspec.yaml file", type=str, default=".", required=False
     )
     parser.add_argument(
-        "--no-push", help="Push the changes to the git repository", action="store_true", default=False
+        "--no-push", help="push the changes to the git repository", action="store_true", default=False
     )
     parser.add_argument(
-        "--no-commit", help="Commit the changes to the git repository", action="store_true", default=False
+        "--no-commit", help="commit the changes to the git repository", action="store_true", default=False
     )
     parser.add_argument(
-        "--no-tag", help="Tag the release in the git repository", action="store_true", default=False
+        "--no-tag", help="tag the release in the git repository", action="store_true", default=False
     )
     parser.add_argument(
-        "--major", help="Upgrade the major version", action="store_true", default=False
+        "--major", help="upgrade the major version", action="store_true", default=False
     )
     parser.add_argument(
-        "--minor", help="Upgrade the minor version", action="store_true", default=False
+        "--minor", help="upgrade the minor version", action="store_true", default=False
     )
     parser.add_argument(
-        "--patch", help="Upgrade the patch version", action="store_true", default=False
+        "--patch", help="upgrade the patch version", action="store_true", default=False
     )
     parser.add_argument(
         "--version", action="version", version=f"%(prog)s v{fvupgrader_version}"
