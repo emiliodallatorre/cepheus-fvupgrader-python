@@ -7,7 +7,6 @@ import re
 from argparse import ArgumentParser
 from pathlib import Path
 
-from poetry.core.factory import Factory
 
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
 version_file: str = "pubspec.yaml"
