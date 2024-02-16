@@ -5,7 +5,6 @@
 import os.path
 import re
 from argparse import ArgumentParser
-from pathlib import Path
 
 
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
