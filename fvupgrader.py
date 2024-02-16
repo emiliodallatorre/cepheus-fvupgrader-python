@@ -5,8 +5,9 @@
 import os.path
 import re
 from argparse import ArgumentParser
+from pathlib import Path
 
-fvupgrader_version: str = "1.0.2"
+from poetry.core.factory import Factory
 
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
 version_file: str = "pubspec.yaml"
@@ -21,6 +22,19 @@ class GitOperationException(Exception):
 
     def __init__(self, message: str) -> None:
         super().__init__(message)
+
+
+def get_fvupgrader_version():
+    """
+    Get the version of the project from the pyproject.toml file.
+
+    Returns:
+        str: The version of the project.
+    """
+    pyproject_path = Path(__file__).parent / 'pyproject.toml'
+    poetry = Factory().create_poetry(pyproject_path)
+
+    return poetry.package.version
 
 
 def get_version(directory_path: str) -> str:
@@ -250,7 +264,7 @@ def entry_point() -> None:
     )
     parser.add_argument(
         "--version",
-        action="version", version=f"%(prog)s v{fvupgrader_version}"
+        action="version", version=f"%(prog)s v{get_fvupgrader_version()}"
     )
 
     args = parser.parse_args()
