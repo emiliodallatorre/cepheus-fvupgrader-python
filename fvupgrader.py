@@ -11,6 +11,7 @@ from poetry.core.factory import Factory
 
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
 version_file: str = "pubspec.yaml"
+version_number: str = "1.0.5"
 
 
 class GitOperationException(Exception):
@@ -26,15 +27,13 @@ class GitOperationException(Exception):
 
 def get_fvupgrader_version():
     """
-    Get the version of the project from the pyproject.toml file.
+    Get the version of the project.
 
     Returns:
         str: The version of the project.
     """
-    pyproject_path = Path(__file__).parent / 'pyproject.toml'
-    poetry = Factory().create_poetry(pyproject_path)
 
-    return poetry.package.version
+    return version_number
 
 
 def get_version(directory_path: str) -> str:
