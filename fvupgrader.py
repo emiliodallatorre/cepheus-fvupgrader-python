@@ -6,7 +6,6 @@ import os.path
 import re
 from argparse import ArgumentParser
 
-
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
 version_file: str = "pubspec.yaml"
 version_number: str = "1.0.5"
@@ -236,15 +235,15 @@ def entry_point() -> None:
         type=str, default=".", required=False
     )
     parser.add_argument(
-        "--no-push", help="push the changes to the git repository",
+        "--no-push", help="do not push the changes to the git repository",
         action="store_true", default=False
     )
     parser.add_argument(
-        "--no-commit", help="commit the changes to the git repository",
+        "--no-commit", help="do not commit the changes to the git repository",
         action="store_true", default=False
     )
     parser.add_argument(
-        "--no-tag", help="tag the release in the git repository",
+        "--no-tag", help="do not tag the release in the git repository",
         action="store_true", default=False
     )
     parser.add_argument(
