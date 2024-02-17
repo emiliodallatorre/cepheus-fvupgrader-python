@@ -69,9 +69,9 @@ def get_available_next_versions(directory_path: str) -> list:
     current_version = current_version.replace("+", ".")
     major, minor, patch, build = current_version.split(".")
     return [
-        f"{major}.{minor}.{int(patch) + 1}+{build}",
-        f"{major}.{int(minor) + 1}.0+{build}",
-        f"{int(major) + 1}.0.0+{build}",
+        f"{major}.{minor}.{int(patch) + 1}+{build + 1}",
+        f"{major}.{int(minor) + 1}.0+{build + 1}",
+        f"{int(major) + 1}.0.0+{build + 1}",
     ]
 
 
