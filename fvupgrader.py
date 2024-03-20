@@ -8,7 +8,7 @@ from argparse import ArgumentParser
 
 version_regex: str = r"version: (\d+\.\d+\.\d+\+\d+)"
 version_file: str = "pubspec.yaml"
-version_number: str = "1.0.7"
+version_number: str = "1.0.8"
 
 
 class GitOperationException(Exception):
