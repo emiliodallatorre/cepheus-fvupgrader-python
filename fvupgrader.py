@@ -119,6 +119,7 @@ def git_operations(new_version: str, directory_path: str, parsed_args) -> None:
     # Push the changes
     if not parsed_args.no_push:
         os.system(f"git -C {directory_path} push")
+        os.system(f"git -C {directory_path} push --tags")
 
 
 def is_dir_git_repo(directory_path: str) -> bool:
